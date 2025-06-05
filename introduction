@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smarter Sampling in Diffusion Models</title>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+  </script>
+</head>
+<body>
+  <h2>Smarter Sampling in Diffusion Models: Optimising the Discretisation Schedule</h2>
+
+  <p>Denoising Diffusion Models (DDMs) have emerged as one of the most powerful tools in generative modelling, underpinning impressive systems like Stable Diffusion and DALL·E. These models generate data by reversing a carefully designed noise-injection process. The idea is to start with real data and add noise progressively until it resembles pure Gaussian noise—a process known as the forward diffusion. Sampling new data involves reversing this process, denoising step by step until one arrives at a sample that looks like real data.</p>
+
+  <p>Mathematically, this forward process can be described using a stochastic differential equation (SDE):</p>
+
+  <p>\[ dX_t = f(t)X_t\,dt + g(t)\,dW_t, \quad X_0 \sim p_0 \]</p>
+
+  <p>where \( f(t) \) and \( g(t) \) control how the noise is added over time, and \( W_t \) is standard Brownian motion. The goal is to pick \( f(t) \) and \( g(t) \) so that by time \( t = \infty \), the distribution \( X_\infty \) is close to a standard Gaussian. Reversing this process ideally gives us new data points that follow the original distribution \( p_0 \).</p>
+
+  <p>However, there's a catch: to simulate this reverse process, we need to discretise time, choosing a sequence of time steps \( T = \{t_i\}_{i=0}^T \). Most previous works use simple schedules, like uniform time intervals. But choosing the wrong discretisation can severely degrade performance, especially for complex distributions.</p>
+
+  <p>In this blog post, we'll walk through a recent advancement that challenges the status quo: an algorithmic method for finding an optimal discretisation schedule. Instead of relying on trial-and-error or manually tuned schedules, this method adapts the schedule based on how the data distribution evolves through time, minimising the sampling error at each step.</p>
+
+  <p>We'll explore why this matters, how the algorithm works, and what it reveals about the geometry of the diffusion process. From recovering subtle modes in complex distributions like the Cantor set, to scaling up to high-dimensional image data, this approach opens the door to more accurate and efficient generative modelling with diffusion models.</p>
+
+</body>
+</html>
